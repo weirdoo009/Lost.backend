@@ -70,7 +70,9 @@ mongoose.connect(`mongodb+srv://21ume118:Eu6HAvsaIBfE25Jj@cluster0.fo6cmdx.mongo
     useNewUrlParser: true,
     useUnifiedTopology:true,
     useFindAndModify:false,
-    useCreateIndex:true
+    useCreateIndex:true,
+    ssl: true,
+    sslValidate: true,
 })
 
 mongoose.connection.on('connected',()=>{
