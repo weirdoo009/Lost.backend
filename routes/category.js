@@ -78,20 +78,6 @@ router.post(
         if (error) return res.status(400).json({ error });
         if (item) return res.status(201).json({ item });
       });
-      // upload.single('image')
-
-      // if(req.body.itemPictures!=''){
-      //   console.log(":Executed:")
-      //   newPost.insert({itemPictures:req.body.itemPictures})
-      // }
-
-      // sendToken(newSignup,201,req,res)
-      // console.log(newPost);
-      // res.status(200).json({
-      //   body:req.body,
-      //   file:req.files
-      // });
-      // res.send("Done")
     } catch (err) {
       console.log("Error")
       res.status(401).json({
@@ -100,46 +86,10 @@ router.post(
     }
   }
 );
-// router.post("/founditem", requireSignin, userMiddleware, async (req, res) => {
-//   try {
-//     console.log(req.body.name,req.body.description,req.body.itemPictures,req.user._id)
-//     const newRequest = await requestitem.create({
-//       name: req.body.name,
-//       description: req.body.description,
-//       itemPictures:req.body.itemPictures,
-//       createdBy: req.user._id,
-//     });
-//     // sendToken(newSignup,201,req,res)
-//     console.log(newRequest);
-//     res.status(200).json({
-//       message: "Request Done",
-//     });
-//     // res.send("Done")
-//   } catch (err) {
-//     res.status(401).json(err.message);
-//   }
-// });
 router.get("/getitem", (req, res) => {
   postitem.find({}).exec((err, postitems) => {
     if (err) return res.status(400).json({ err });
     if (postitems) {
-      // let items_list=[]
-      // postitems.map((item)=>{
-      //   // console.log(item.createdBy)
-      //   SignUp.find({_id:item.createdBy}).lean()
-      //   .exec((error,info)=>{
-      //     if (error) res.status(400).json({'error':error})
-      //     // res.json(info)
-      //     // console.log(info[0].username)
-      //     // res.status(200).json({
-      //     // console.log(typeof(item))
-      //     item.username=info[0].username
-      //     console.log(item)
-      //     items_list.push(item)
-      //     // console.log(items_list)
-      //     // })
-      //   })
-      // })
       res.status(200).json({
         postitems,
       });
@@ -247,10 +197,6 @@ router.get("/getquestion/:id", (req, res) => {
 router.post("/submitAnswer", async (req, res) => {
   console.log(req.body);
   const { itemId, question, answer, givenBy, belongsTo } = req.body;
-  // postitem.find({_id:itemId}).exec(((err,user)=>{
-  //   console.log(user[0].createdBy)
-  //   belongsTo=user[0].createdBy
-  // }))
 
   const newmessage = await messageschema.create({
     itemId: itemId,

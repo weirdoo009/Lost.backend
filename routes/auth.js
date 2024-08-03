@@ -1,5 +1,3 @@
-// const { request } = require("express");
-// const bcryptjs =require('bcryptjs')
 const express = require('express')
 const nodemailer=require("nodemailer")
 const mailgun =require("nodemailer-mailgun-transport")
@@ -7,14 +5,9 @@ const router = express.Router()
 const jwt=require('jsonwebtoken')
 // const httpProxy = require('http-proxy');
 const {requireSignin}=require('../middleware')
-// const proxy = httpProxy.createServer({});
-// const passport=require('passport')
 const {promisify}=require("util")
 const Signup=require('../models/signup');
 const { token } = require('morgan');
-// const { db } = require("../models/signup");
-// const { Router } = require('express');
-// const { token } = require('morgan');
 require("dotenv").config();
 const JWT_SECRET=process.env.JWT_SECRET
 const JWT_EXPIRES=process.env.JWT_EXPIRES
@@ -137,25 +130,6 @@ router.post('/signup',checkField,checkUsername,checkPassword,async (req,res)=>{
     var email=req.body.email
     var number=req.body.number
     var password=req.body.password
-    // password=bcryptjs.hashSync(password,10) //encrypting the password
-    // var newSignup=new Signup({
-    //     username:username,
-    //     password:password
-    // })
-    // newSignup.save((error)=>{
-    //     if(error){
-    //         console.log('Error occured in pushing the data')
-    //         // res.status(500).json({msg:'error occured'})
-    //     }
-    //     else{
-    //         sendToken(newSignup,201,req,res)
-    //         console.log('Data pushed')
-    //         res.send("Done")
-    //         // proxy.web(req, res, { target: 'http://localhost:3000/log-in' });
-    //         // res.json({msg:'Successfully pushed'})
-    //     }
-    // })
-
     try{
         // console.log(firstname,lastname,email,password)
         const newSignup = await Signup.create({
@@ -219,10 +193,6 @@ router.post('/signout',requireSignin, signout)
 router.post('/feed',requireSignin,(req,res)=>res.status(200).json({
     message:"Working fine"
 }))
-// router.use(secure)
-// router.post('/feed',requireSignin,(req,res)=>res.status(200).json({
-//     message:"Working fine"
-// }))
 
 router.post('/sendmessage',(req,res)=>{
     console.log(req.body)
